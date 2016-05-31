@@ -4,12 +4,13 @@
 <meta charset="UTF-8" />
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="LINK.css" />
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <!-- TODO mouseover pointers change as appropriate -->
 <!-- TODO smooth transiiton between form and menu -->
 <!-- Standard font over text and submit buttons and text fields -->
-<!-- AJAX to check username availability -->
-<!-- Add Captcha -->
+<!-- AJAX to check username availability : added code-->
+<!-- Add Captcha: added code -->
 <!-- Form error handling -->
 
 <style>
@@ -157,7 +158,8 @@ function hideDiv(element){
 
 		<p class="exitButton" onclick="hideDiv(this)">  &#x2716;</p>
 		
-			<form name="signUpForm" id="regForm" method="post" action="">
+		 	<!--  RegisterServlet checks Captcha -->
+			<form name="signUpForm" id="regForm" method="post" action="RegisterServlet">
 			<p>
 				<input type="text" required="required" size="15" max="15"
 				name="firstName" id="firstNameId" placeholder="First Name" /> 
@@ -165,9 +167,9 @@ function hideDiv(element){
 					max="15" name="lastName" id="lastNameId" placeholder="Last Name" />
 			</p>
 			<p>
-					<!-- AJAX to check availability -->
+					<!-- AJAX to check availability "onblur"-->
 				<input type="text" required="required" size="15" max="15"
-					name="username" id="usernameId" placeholder="Username" />
+					name="username" id="usernameId" placeholder="Username" onblur="checkUser()" />
 			</p>
 			<p>
 					<!-- Check email is valid -->
@@ -189,8 +191,11 @@ function hideDiv(element){
 				<input type="password" id="passwordConfirmId" required="required" 
 					size="15" placeholder="Confirm password" />
 			</p>
+			
+			<!--  Captcha functionality -->
+			<div class="g-recaptcha" data-sitekey="6LdMAgMTAAAAAGYY5PEQeW7b3L3tqACmUcU6alQf"></div>
 			<p>
-				<input type="submit" name="submitButton" id="submitId" value="Sign Up" onclick="captcha()" />
+				<input type="submit" name="submitButton" id="submitId" value="Sign Up" />
 			</p>
 			</form>
 
@@ -208,9 +213,7 @@ function hideDiv(element){
 					required="required" size="15" placeholder="Password" />
 		</p>
 		<br/>
-		
-		
-			
+		 
 		<p>
 			<input type="submit" name="submitButton" id="submitId" value="Sign In" />
 		</p>
@@ -220,7 +223,38 @@ function hideDiv(element){
 
 </div>
 
-
+	<script>
+         function checkUser(){
+					// AJAX call XMLHTTP
+					var xmlhttp = new XMLHttpRequest();
+              		var username = document.forms["signUpForm"]["username"].value;
+            		var url = "CheckUser.jsp?username=" + username;
+             		 xmlhttp.onreadystatechange = function(){
+		             // readyState of 4 signifies request is complete
+		             // status of 200 signifies sucessful HTTP call
+		             if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+		                  if(xmlhttp.responseText == "False"){
+		                   	// change color to indicate success or fail
+		                       document.getElementById("respond").style.color = "red";
+		                       document.getElementById("respond").innerHTML = "Username already exists";
+		                  }else{
+		                        document.getElementById("respond").style.color = "green";
+		                        document.getElementById("respond").innerHTML = "Username is valid";
+		                  }  
+		                      
+		              }
+              };
+              
+              try{
+              // make an AJAX GET request to the URL asynchronously	
+              xmlhttp.open("GET",url,true);
+              xmlhttp.send();
+          }catch(e){
+        	  alert("unable to connect to server");
+          }
+          }
+    
+  </script>    
 
 
 
