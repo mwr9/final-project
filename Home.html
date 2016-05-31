@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset="UTF-8" />
+<title>Home</title>
+<link rel="stylesheet" type="text/css" href="LINK.css" />
+
+<!-- TODO mouseover pointers change as appropriate -->
+<!-- TODO smooth transiiton between form and menu -->
+<!-- Standard font over text and submit buttons and text fields -->
+<!-- AJAX to check username availability -->
+<!-- Add Captcha -->
+<!-- Form error handling -->
+
+<style>
+	html, body {
+		height: 99%;
+		margin: 0px;
+		padding: 0px;
+		border: none;
+		background-image: url("Photos/background5.jpeg");
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+	}
+	
+	#topBanner {
+		position: absolute;
+		top: 0;
+		border: none;
+		margin: 0px;
+		padding: 0px;
+		height: 60px;
+		width: 100%;
+	}
+	#homeLink {
+		font-size: 300%;
+		margin-left: 10px;
+		cursor: pointer;
+	}
+	#mainBody {
+		position: absolute;
+  		margin: auto;
+  		top: 0;
+  		right: 0;
+  		bottom: 20%;
+  		left: 0;
+  		width: 480px;
+  		height: 400px;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 100px 5px 100px;
+	}
+	#signUpButton, #signInButton, input[type=submit], #continueSignUpButton{
+		margin: auto;
+		position: relative;
+		width: 300px;
+		height: 60px;
+		background-color: blue;
+		border-radius: 10px;
+		text-align: center;
+		line-height: 60px;
+		font-size: 150%;
+		color: #7A8D95;
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.9);
+		border: none;
+	}
+	#signInButton {
+		top: 20px;
+	}
+	
+	#signUpFormDiv, #signInFormDiv {
+		z-index: 20;
+		position: relative;
+		margin: auto;
+		width: 480px;
+  		height: 400px;
+		background-color: rgba(0, 0, 0, 0.5);
+		visibility: hidden;
+		text-align: center;
+		border-radius: 5px 100px 5px 100px;
+	}
+	
+	#signUpFormDiv {
+		bottom: 90%;
+	}
+	#signInFormDiv {
+		bottom: 195%;
+	}
+	.mainHeading {
+		font-size: 300%;
+		text-align: center;
+	}
+	.formHeading {
+		position: relative;
+		padding-top: 50px;
+	}
+	#descriptionText {
+		font-size: 150%;
+		text-align: center;
+	}
+	input {
+		font-size: 135%;
+	}
+	.exitButton {
+		text-align: left;
+		font-size: 120%;
+		margin-left: 8px;
+		cursor: pointer;
+	}
+	input {
+		border: none;
+		border-radius: 3px;
+		outline: none;
+	}
+	input:focus {
+		border: solid black 1px;
+		box-shadow: 0 0 5px black;
+	}
+
+</style>
+
+<script>
+
+function showForm(element) {
+    var form = document.getElementById(element);
+    form.style.visibility = "visible";
+    var mainDiv = document.getElementById('mainBody');
+    mainDiv.style.visibility = "hidden";
+}
+function hideDiv(element){
+	element.parentNode.style.visibility = "hidden";
+	var mainDiv = document.getElementById('mainBody');
+    mainDiv.style.visibility = "visible";
+}
+
+
+
+</script>
+
+
+</head>
+<body>
+
+<div id="topBanner">
+	<div id="homeLink">&#9650;</div>
+
+</div>
+
+<div id="mainBody">
+	<h1 class="mainHeading">Bloggity Blog</h1>
+	<p id="descriptionText">This is information. about loads of things and how wonderful this blog is and everyone who will use it</p>
+	<div id="signUpButton" onclick="showForm('signUpFormDiv')">Join Us</div>
+	<div id="signInButton" onclick="showForm('signInFormDiv')">Sign In</div>
+	
+	<div id="signUpFormDiv" >
+
+		<p class="exitButton" onclick="hideDiv(this)">  &#x2716;</p>
+		
+			<form name="signUpForm" id="regForm" method="post" action="">
+			<p>
+				<input type="text" required="required" size="15" max="15"
+				name="firstName" id="firstNameId" placeholder="First Name" /> 
+				<input type="text" required="required" size="15"
+					max="15" name="lastName" id="lastNameId" placeholder="Last Name" />
+			</p>
+			<p>
+					<!-- AJAX to check availability -->
+				<input type="text" required="required" size="15" max="15"
+					name="username" id="usernameId" placeholder="Username" />
+			</p>
+			<p>
+					<!-- Check email is valid -->
+				<input type="email" name="email" id="emailId" 
+					required="required" size="30" placeholder="Email address" />
+			</p>
+			<p>
+					<!-- Check confirm email is the same -->
+				<input type="email" id="emailConfirmId" 
+					required="required" size="30" placeholder="Confirm email address" />
+			</p>
+			<p>
+					<!-- Check password is valid - longer than 8 characters, 1 number, 1 capital, 1 lowercase -->
+				<input type="password" name="password" id="passwordId" 
+					required="required" size="15" placeholder="Password" />
+			</p>
+			<p>
+					<!-- Check confirm password is the same -->
+				<input type="password" id="passwordConfirmId" required="required" 
+					size="15" placeholder="Confirm password" />
+			</p>
+			<p>
+				<input type="submit" name="submitButton" id="submitId" value="Sign Up" onclick="captcha()" />
+			</p>
+			</form>
+
+	</div>
+	<div id="signInFormDiv">
+		<p class="exitButton" onclick="hideDiv(this)">  &#x2716;</p>
+		<br/><br/>
+		<form name="signInForm" id="signInForm" action="">
+		<p>
+			<input type="text" required="required" size="15" max="15"
+					name="username" id="usernameId" placeholder="Username" />
+		</p>
+		<p>
+			<input type="password" name="password" id="passwordId" 
+					required="required" size="15" placeholder="Password" />
+		</p>
+		<br/>
+		
+		
+			
+		<p>
+			<input type="submit" name="submitButton" id="submitId" value="Sign In" />
+		</p>
+		</form>
+		
+	</div>
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
