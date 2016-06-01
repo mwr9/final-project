@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset="UTF-8" />
+<title>Blog Home</title>
+<link rel="stylesheet" type="text/css" href="SiteDefault.css" />
+
+<link rel="stylesheet" href="jquery-ui-smoothness.css" />
+<script src="jquery.min.js" ></script>
+<script src="jquery-ui.min.js" ></script>
+
+<!--  TODO optimise photo dimensions -->
+
+<style>
+
+	#mainProfileDetailsDiv {
+		background-color: pink;
+		position: relative;
+		display:block;
+  		margin: auto;
+  		top: 15%;
+  		right: 0;
+  		left: 0;
+  		bottom: 0;
+  		width: 80%;
+  		min-height: 400px;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 50px 5px 50px;
+	}
+	#leftSideDiv {
+		float: left;
+		padding: 10px;
+		width: 30%;
+		min-width: 250px;
+	}
+	#rightSideDiv {
+		overflow: hidden;
+		padding: 10px;
+	}
+	#profilePhotoDiv {
+		position: relative;
+		margin: auto;
+	}
+	#profileImage {
+		width: auto;
+		height: auto;
+		max-height: 250px;
+		max-width: 250px;
+		display: block;
+   	 	margin-left: auto;
+    	margin-right: auto;
+    	border-radius: 5px;
+	}
+	#themeDiv {
+		margin: auto;
+		margin-top: 20px;
+		position: relative;
+		width: 250px;
+		height: 50px;
+		border-radius: 10px;
+		text-align: center;
+		line-height: 50px;
+		font-size: 120%;
+		color: #7A8D95;
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.9);
+	}
+	#profileDetailsDiv {
+		font-size: 130%;
+	}
+	.articleDiv {
+		position: relative;
+		margin: auto;
+		top: 15%;
+		width: 75%;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 50px 5px 50px;
+  		padding: 10px;
+  		padding-left: 20px;
+  		margin-top: 20px;
+  		margin-bottom: 20px;
+	}
+	#title {
+		margin: auto;
+		width: 200px;
+		text-align: center;
+		position: relative;
+		bottom: 70px;
+	}
+	tr td:first-child {
+		font-weight: bold;
+		padding-right: 10px;	
+	}
+	td {
+		padding-bottom: 20px;
+	}
+
+	@media (max-width:750px) { 
+		#rightSideDiv {
+			float: none;
+			position: relative;
+			min-width: 300px;
+		}
+		#leftSideDiv {
+			float: none;
+			position: relative;
+			width: 100%;
+		}
+		#mainProfileDetailsDiv {
+			display:block;
+			
+		}
+	}
+
+
+</style>
+
+
+<script>
+
+
+
+</script>
+
+
+</head>
+<body>
+<div id="topBanner">
+	<div id="homeLink">&#x25b3;</div>
+	<div id="title"><h1 id="blogHeading">Bloggity Blog</h1></div>
+	<div id="profileLink">&#9633;</div>
+</div>
+
+<div id="mainProfileDetailsDiv">
+	<div id="leftSideDiv">
+		<div id="profilePhotoDiv">
+			<img src="Photos/stranger.jpg" id="profileImage" />
+		</div>
+		<div id="themeDiv">Default Theme</div>
+	</div>
+	<div id="rightSideDiv">
+		<div id="profileDetailsDiv">
+			<table id="profileTable">
+				<tr>
+					<td>Username</td>
+					<td>thisIsIt</td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td>My Name Here</td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td>Here is my email address</td>
+				</tr>
+				<tr>
+					<td>DOB</td>
+					<td>this is it//if null - blank</td>
+				</tr>
+				<tr>
+					<td>Location</td>
+					<td>blank if null</td>
+				</tr>
+				<tr>
+					<td>Occupation</td>
+					<td>Probably Unemployed, let's be honest</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<div class="articleDiv">
+	<h2>This is the heading</h2>
+	<p>This is the body</p>
+</div>
+<div class="articleDiv">
+	<h2>This is the heading</h2>
+	<p>This is the body
+	dslfghdsgjhds
+	dsfjgksdfbksdb
+	dsmgskjh,j</p>
+</div>
+
+</body>
+</html>

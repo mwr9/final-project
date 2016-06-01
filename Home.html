@@ -3,53 +3,46 @@
 <head>
 <meta charset="UTF-8" />
 <title>Home</title>
-<link rel="stylesheet" type="text/css" href="LINK.css" />
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<link rel="stylesheet" type="text/css" href="SiteDefault.css" />
+
+    <link rel="stylesheet" href="jquery-ui-smoothness.css" />
+    <script src="jquery.min.js" ></script>
+    <script src="jquery-ui.min.js" ></script>
+
+<!-- FadeIN/OUT for signupDiv is moving the position of the background image?????????? -->
 
 <!-- TODO mouseover pointers change as appropriate -->
 <!-- TODO smooth transiiton between form and menu -->
 <!-- Standard font over text and submit buttons and text fields -->
-<!-- AJAX to check username availability : added code-->
-<!-- Add Captcha: added code -->
+<!-- AJAX to check username availability -->
+<!-- Add Captcha -->
 <!-- Form error handling -->
 
 <style>
-	html, body {
-		height: 99%;
-		margin: 0px;
-		padding: 0px;
-		border: none;
-		background-image: url("Photos/background5.jpeg");
-		background-size: cover;
-		background-position: 50% 50%;
-		background-repeat: no-repeat;
-	}
-	
-	#topBanner {
-		position: absolute;
-		top: 0;
-		border: none;
-		margin: 0px;
-		padding: 0px;
-		height: 60px;
-		width: 100%;
-	}
-	#homeLink {
-		font-size: 300%;
-		margin-left: 10px;
-		cursor: pointer;
-	}
+
 	#mainBody {
+		height: 400px;
+	}
+	#mainBody, #signUpFormDiv, #signInFormDiv {
 		position: absolute;
   		margin: auto;
   		top: 0;
   		right: 0;
-  		bottom: 20%;
   		left: 0;
+  		bottom: 20%;
   		width: 480px;
-  		height: 400px;
 		background-color: rgba(0, 0, 0, 0.5);
   		border-radius: 5px 100px 5px 100px;
+	}
+	#signUpFormDiv, #signInFormDiv {
+		text-align: center;
+		display: none;
+	}
+	#signInFormDiv {
+		height: 400px;
+	}
+	#signUpFormDiv {
+		height: 500px;
 	}
 	#signUpButton, #signInButton, input[type=submit], #continueSignUpButton{
 		margin: auto;
@@ -69,25 +62,6 @@
 	#signInButton {
 		top: 20px;
 	}
-	
-	#signUpFormDiv, #signInFormDiv {
-		z-index: 20;
-		position: relative;
-		margin: auto;
-		width: 480px;
-  		height: 400px;
-		background-color: rgba(0, 0, 0, 0.5);
-		visibility: hidden;
-		text-align: center;
-		border-radius: 5px 100px 5px 100px;
-	}
-	
-	#signUpFormDiv {
-		bottom: 90%;
-	}
-	#signInFormDiv {
-		bottom: 195%;
-	}
 	.mainHeading {
 		font-size: 300%;
 		text-align: center;
@@ -100,16 +74,16 @@
 		font-size: 150%;
 		text-align: center;
 	}
-	input {
-		font-size: 135%;
-	}
 	.exitButton {
+		position: absolute;
 		text-align: left;
 		font-size: 120%;
 		margin-left: 8px;
+		margin-top: -118px;
 		cursor: pointer;
 	}
 	input {
+		font-size: 120%;
 		border: none;
 		border-radius: 3px;
 		outline: none;
@@ -118,22 +92,66 @@
 		border: solid black 1px;
 		box-shadow: 0 0 5px black;
 	}
+	#usernameId, #passwordId, #errorsDiv {
+		position: relative;
+		top: -20px;
+	}
+	.valid {
+		border: solid green 1px;
+		box-shadow: 0 0 5px green;
+	}
+	.invalid {
+		border: solid red 1px;
+		box-shadow: 0 0 5px red;
+	}
+
 
 </style>
 
 <script>
 
-function showForm(element) {
-    var form = document.getElementById(element);
-    form.style.visibility = "visible";
-    var mainDiv = document.getElementById('mainBody');
-    mainDiv.style.visibility = "hidden";
+function showForm(elemName) {
+    $('#mainBody').fadeOut(1000);
+    //Coundn't get passing in variable i.e. elemName to work correctly 
+    //so had to check value and fade the appropriate div
+    if(elemName == "signUpFormDiv"){
+    	$('#signUpFormDiv').fadeIn(500);
+    } else {
+    	$('#signInFormDiv').fadeIn(500);
+    }  
 }
-function hideDiv(element){
-	element.parentNode.style.visibility = "hidden";
-	var mainDiv = document.getElementById('mainBody');
-    mainDiv.style.visibility = "visible";
+function hideDiv(elemName){
+	$('#mainBody').fadeIn(1000);
+    if(elemName == "signUpFormDiv"){
+    	$('#signUpFormDiv').fadeOut(500);
+    } else {
+    	$('#signInFormDiv').fadeOut(500);
+    }  
 }
+
+function validateField(elemName){
+	var thisElem = document.getElementById(elemName);
+	if(thisElem.type == "text" ){
+		alert();
+	}
+	thisElem.style.border = "solid red 1px";
+	document.getElementById('errorsDiv').innerHTML = "ERROR";
+}
+function validateForm(){
+	
+}
+
+function validateTextField(element){
+	var text = element.value;
+	if(text.matches("^[A-z0-9]+$")){
+		element.className += "valid";
+		alert(element.value);
+	} else {
+		element.className -= "valid";
+		element.className += "invalid";
+	}
+}
+
 
 
 
@@ -144,76 +162,106 @@ function hideDiv(element){
 <body>
 
 <div id="topBanner">
-	<div id="homeLink">&#9650;</div>
+	<div id="homeLink">&#x25b3;</div>
 
 </div>
 
-<div id="mainBody">
+<div id="mainBody" >
 	<h1 class="mainHeading">Bloggity Blog</h1>
 	<p id="descriptionText">This is information. about loads of things and how wonderful this blog is and everyone who will use it</p>
 	<div id="signUpButton" onclick="showForm('signUpFormDiv')">Join Us</div>
 	<div id="signInButton" onclick="showForm('signInFormDiv')">Sign In</div>
-	
-	<div id="signUpFormDiv" >
+</div>
 
-		<p class="exitButton" onclick="hideDiv(this)">  &#x2716;</p>
+	<div id="signUpFormDiv" >
+		<h1 class="mainHeading">Bloggity Blog</h1>
+		<p class="exitButton" onclick="hideDiv('signUpFormDiv')">  &#x2716;</p>
 		
-		 	<!--  RegisterServlet checks Captcha -->
-			<form name="signUpForm" id="regForm" method="post" action="RegisterServlet">
+			<form name="signUpForm" id="regForm" method="post" action="">
 			<p>
-				<input type="text" required="required" size="15" max="15"
-				name="firstName" id="firstNameId" placeholder="First Name" /> 
-				<input type="text" required="required" size="15"
-					max="15" name="lastName" id="lastNameId" placeholder="Last Name" />
+				<input type="text" 
+				name="firstName" 
+				id="firstNameId" 
+				required="required" 
+				size="15" max="15"
+				placeholder="First Name" 
+				onchange="validateTextField(this)"
+				onblur="validateTextField(this)" /> 
+				<input type="text" 
+				name="lastName" 
+				id="lastNameId"
+				required 
+				size="15" max="15"  
+				placeholder="Last Name" />
 			</p>
 			<p>
-					<!-- AJAX to check availability "onblur"-->
-				<input type="text" required="required" size="15" max="15"
-					name="username" id="usernameId" placeholder="Username" onblur="checkUser()" />
+				<!-- AJAX to check availability -->
+				<input type="text" 
+				name="username" 
+				id="username" 
+				required="required" 
+				size="15" max="15"
+				placeholder="Username" />
 			</p>
 			<p>
-					<!-- Check email is valid -->
-				<input type="email" name="email" id="emailId" 
-					required="required" size="30" placeholder="Email address" />
+				<!-- Check email is valid -->
+				<input type="email" 
+				name="email" 
+				id="email" 
+				required="required" 
+				size="30" 
+				placeholder="Email address" />
 			</p>
 			<p>
-					<!-- Check confirm email is the same -->
-				<input type="email" id="emailConfirmId" 
-					required="required" size="30" placeholder="Confirm email address" />
+				<!-- Check confirm email is the same -->
+				<input type="email" 
+				id="emailConfirmId" 
+				required="required" 
+				size="30" 
+				placeholder="Confirm email address" />
 			</p>
 			<p>
-					<!-- Check password is valid - longer than 8 characters, 1 number, 1 capital, 1 lowercase -->
-				<input type="password" name="password" id="passwordId" 
-					required="required" size="15" placeholder="Password" />
+				<!-- Check password is valid - longer than 8 characters, 1 number, 1 capital, 1 lowercase -->
+				<input type="password" 
+				name="password" 
+				id="password" 
+				required="required" 
+				size="15" 
+				placeholder="Password" />
 			</p>
 			<p>
-					<!-- Check confirm password is the same -->
-				<input type="password" id="passwordConfirmId" required="required" 
-					size="15" placeholder="Confirm password" />
+				<!-- Check confirm password is the same -->
+				<input type="password" 
+				id="passwordConfirmId" 
+				required="required" 
+				size="15" 
+				placeholder="Confirm password" />
 			</p>
-			
-			<!--  Captcha functionality -->
-			<div class="g-recaptcha" data-sitekey="6LdMAgMTAAAAAGYY5PEQeW7b3L3tqACmUcU6alQf"></div>
+			<div id="errorsDiv"></div>
 			<p>
-				<input type="submit" name="submitButton" id="submitId" value="Sign Up" />
+				<input type="submit" 
+				name="submitButton" 
+				id="submitId" 
+				value="Sign Up"  />
 			</p>
 			</form>
-
+	
 	</div>
 	<div id="signInFormDiv">
-		<p class="exitButton" onclick="hideDiv(this)">  &#x2716;</p>
+		<h1 class="mainHeading">Bloggity Blog</h1>
+		<p class="exitButton" onclick="hideDiv('signInFormDiv')">  &#x2716;</p>
 		<br/><br/>
 		<form name="signInForm" id="signInForm" action="">
 		<p>
-			<input type="text" required="required" size="15" max="15"
+			<input type="text" size="15" max="15" onchange="validateField('usernameId')"
 					name="username" id="usernameId" placeholder="Username" />
 		</p>
 		<p>
 			<input type="password" name="password" id="passwordId" 
-					required="required" size="15" placeholder="Password" />
+					size="15" placeholder="Password" />
 		</p>
 		<br/>
-		 
+		<div id="errorsDiv"></div>
 		<p>
 			<input type="submit" name="submitButton" id="submitId" value="Sign In" />
 		</p>
@@ -221,40 +269,9 @@ function hideDiv(element){
 		
 	</div>
 
-</div>
 
-	<script>
-         function checkUser(){
-					// AJAX call XMLHTTP
-					var xmlhttp = new XMLHttpRequest();
-              		var username = document.forms["signUpForm"]["username"].value;
-            		var url = "CheckUser.jsp?username=" + username;
-             		 xmlhttp.onreadystatechange = function(){
-		             // readyState of 4 signifies request is complete
-		             // status of 200 signifies sucessful HTTP call
-		             if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-		                  if(xmlhttp.responseText == "False"){
-		                   	// change color to indicate success or fail
-		                       document.getElementById("respond").style.color = "red";
-		                       document.getElementById("respond").innerHTML = "Username already exists";
-		                  }else{
-		                        document.getElementById("respond").style.color = "green";
-		                        document.getElementById("respond").innerHTML = "Username is valid";
-		                  }  
-		                      
-		              }
-              };
-              
-              try{
-              // make an AJAX GET request to the URL asynchronously	
-              xmlhttp.open("GET",url,true);
-              xmlhttp.send();
-          }catch(e){
-        	  alert("unable to connect to server");
-          }
-          }
-    
-  </script>    
+
+
 
 
 
