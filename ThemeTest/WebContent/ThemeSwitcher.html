@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="jquery.themes.css">
+<link id="theme-style">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.cookie.js"></script>
+<script type="text/javascript" src="jquery.themes.js"></script>
+<style>
+#selectThemes {
+	display: none;
+	float: left;
+}
+
+/* setting up jQuery themes */
+.ui-widget h1, .ui-widget h2, .ui-widget h3, .ui-widget h4 {
+	color: inherit;
+	font-family: inherit;
+}
+/*  ThemeRoller opacity makes reading disabled controls VERY difficult  */
+textarea.ui-state-disabled, input.ui-state-disabled {
+	opacity: 1 !important;
+	filter: Alpha(Opacity = 100) !important;
+}
+</style>
+<script>
+	if ($.cookie("css")) {
+		$("link").attr("href", $.cookie("css"));
+	}
+
+	$(document).ready(function() {
+		$("#themes").click(function() {
+			var selectedVal = $("#themes:selected").val();
+			$("link").attr("href", $(this).attr(selectedVal));
+			$.cookie("css", $(this).attr(selectedVal), {
+				expires : 365,
+				path : '/'
+			});
+			return false;
+		})
+	});
+</script>
+
+<script type="text/javascript">
+	$.themes
+			.setDefaults({
+				cookieExpiry : 7,
+				themeBase : 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/',
+				icons : 'themes.gif',
+				previews : 'themes-preview.gif'
+			});
+
+	$(function() {
+		$('#hoverThemes').hover(function() {
+			$('#selectThemes').toggle();
+		});
+		$('#selectThemes').themes();
+		$('#date').datepicker();
+	});
+</script>
+
+<script>
+	/* for user defined themeroller style */
+	function changeTheme() {
+		var theme = $("#ddlTheme :selected").val();
+		var cssUrl = 'css/themes/' + theme + '/jquery-ui-1.8.13.custom.css';
+
+		var themeStyle = $("#theme-style");
+		themeStyle.attr({
+			rel : "stylesheet",
+			type : "text/css",
+			href : cssUrl
+		});
+
+	}
+</script>
+
+</head>
+
+<body>
+	<!-- Make the whole document a widget and therefore actionable by JQuery: a sneaky hack! -->
+
+	<div id="container" class="ui-widget ui-widget-content">
+		<div id="pagetop" class="ui-widget-header"></div>
+
+		<fieldset>
+		
+		<legend>Theme Area</legend>
+		<br>
+		<div id=widgetThemes>
+			<p>
+				<span id="hoverThemes"> <span id="selectLabel">Hover here to select an existing theme...</span> <span id="selectThemes"></span>
+				</span>
+			</p>
+		</div>
+		<strong> OR </strong>
+		
+		<p> Upload your own theme </p>
+		
+		<form name="customTheme" action="StyleFileUpload" method="post" enctype="multipart/form-data">
+		<fieldset>
+		<legend>Upload a Style File (5Mb max)</legend>
+		<p><span><input type="button" value="Instructions"></span> </p>
+		<p><input type="file" required="required" name="file" id="file_id" size="100" /></p>
+		<p><input type="submit" id="submit_id" value="Upload"> </p>
+		</form>
+		</fieldset>
+		
+		<br> 
+	
+		
+		<div id="dropdownTheme">
+			<select id="ddlTheme" name="selectTheme"> 
+				<option value="Theme1">Theme 1</option>
+				<option value="Theme2" selected>Theme 2</option>
+				<option value="Theme3">Theme 3</option>
+			</select>
+		<p><span><input type="button" value="Change Theme" onclick="changeTheme()"></span> </p>
+		</div>
+		
+		</fieldset>
+	
+	<!--  <p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p>-->
+	<fieldset>
+		<legend>jQuery UI sample</legend>
+		<h2 class="demoHeaders">Datepicker</h2>
+		<div id="date"></div>
+	</fieldset>
+
+	<p>
+		<em>From Wikipedia, the free encyclopedia</em>, <a
+			href="https://en.wikipedia.org/wiki/Apirana_Ngata">Āpirana Ngata
+			page</a>
+	</p>
+
+	<p>
+		<strong>Sir Āpirana Turupa Ngata</strong> (3 July 1874 – 14 July 1950)
+		was a prominent New Zealand politician and lawyer. He has often been
+		described as the foremost Māori politician to have ever served in
+		Parliament, and is also known for his work in promoting and protecting
+		Māori culture and language.
+	</p>
+
+	<hr class="clear" />
+
+	<h2>
+		<a id="early_life"></a>Early life
+	</h2>
+
+	<div id="dialog" title="Basic dialog">
+		<p>One of 15 children, Ngata was born in Te Araroa (then called
+			Kawakawa), a small coastal town about 175 kilometres north of
+			Gisborne, New Zealand.[1] His iwi was Ngāti Porou. His father was
+			Paratene Ngata, a tribal leader and expert in traditional lore, and
+			his mother was Katerina Naki, the daughter of an itinerant Scot, Abel
+			Knox.[2] Ngata was greatly influenced both by his father and by his
+			great-uncle Ropata Wahawaha (who had led loyal kupapa Ngāti Porou
+			forces against their Pai Mārire enemy (commonly known as Hauhau) in
+			the East Cape War and later Te Kooti's escapees from the Chatham
+			Islands.)[3] Ngata was raised in a Māori environment, speaking the
+			Māori language, but his father also ensured that Ngata learned about
+			the Pākehā world, believing that this understanding would be of
+			benefit to Ngāti Porou.</p>
+	</div>
+
+	<p>Ngata attended primary school in Waiomatatini before moving on
+		to Te Aute College, where he received a Pākehā-style education. Ngata
+		performed well, and his academic results were enough to win him a
+		scholarship to Canterbury University College (now the University of
+		Canterbury), where he studied political science and law. He gained a
+		BA in politics in 1893, the first Māori to complete a degree at a New
+		Zealand university, then gained an LL.B. at the University of Auckland
+		in 1896 (the first New Zealander, Māori or Pakeha, to gain a double
+		degree).[4]</p>
+
+	<hr />
+
+	<h2>
+		<a id="marriage"></a>Marriage
+	</h2>
+	<p>In 1895, a year before finishing his second degree (law), Ngata
+		married 16-year-old Arihia Kane Tamati who was also of the Ngāti Porou
+		iwi. Ngata had previously been engaged to Arihia's elder sister, Te
+		Rina, but she died. Apirana and Arihia had eleven children; six girls
+		and five boys.[1]</p>
+	<p>Shortly after Ngata's legal qualifications were recognised, he
+		and his wife returned to Waiomatatini where they built a house. Ngata
+		quickly became prominent in the community, making a number of efforts
+		to improve the social and economic conditions of Māori across the
+		country. He also wrote extensively on the place of Māori culture in
+		the modern age. At the same time, he gradually acquired a leadership
+		role within Ngāti Porou, particularly in the area of land management
+		and finance.</p>
+
+	<hr />
+
+	<h2>
+		<a id="political_career"></a>Political career
+	</h2>
+
+
+
+	</div>
+</body>
+</html>
