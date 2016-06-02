@@ -18,13 +18,26 @@
     
 		Connection conn = null;
 
-try{
-        Class.forName("com.mysql.jdbc.Driver");
-        conn =(Connection) DriverManager.getConnection("jdbc:mysql://mysql/cms_ictg2", "cms-ictg2", "MarkChloe146!");
-        	
+		try{
+			String dbMode = "mysql";
+			String dbClassName = "com.mysql.jdbc.Driver";
+			String host = "mysql";
+			
+			
+			String db = "cms_ictg2";       
+			String username = "cms-ictg2"; 
+			String password = "MarkChloe146!";
+			
+			Class.forName(dbClassName);
+		
+			String DB_CONNSTRING = "jdbc:"+dbMode+"://" + host + "/" + db;
+		
+			conn = DriverManager.getConnection(DB_CONNSTRING, username, password);
+	
+	        	
         	String userName= request.getParameter("username");
         	Statement stmt = conn.createStatement();
-        	ResultSet rs = stmt.executeQuery("SELECT  * FROM Members WHERE username=" + userName);
+        	ResultSet rs = stmt.executeQuery("SELECT  * FROM Members WHERE userName=" + userName);
            
             if(rs.first()){
                 out.print("False");
