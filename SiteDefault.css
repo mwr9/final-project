@@ -1,0 +1,350 @@
+/* TODO whole border seems clickable - need to check button div widths 
+
+
+
+
+*/
+	html, body {
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+		border: none;
+		background-image: url("Photos/background5.jpeg");
+		background-size: cover;
+		background-position: 50% 50%;
+	}
+	.transparent {
+		background-color: rgba(0, 0, 0, 0.3);	
+	} 
+
+/*TOP BANNER FORMATTING*/
+
+	.topBanner {
+		position: absolute;
+		top: 0;
+		border: none;
+		margin: 0px;
+		padding: 0px;
+		height: 50px;
+		width: 100%;
+		cursor: default;
+
+	}
+	.homeLink, .profileLink, .addBlogLink {
+		position: relative;
+		font-size: 300%;
+		margin-left: 10px;
+		cursor: pointer;
+		bottom: 5px;
+	}
+	.addBlogLink {
+		float: right;
+		width: 30px;
+		top: -50px;
+		top: -138px;
+	}
+	.profileLink {
+		font-weight: bold;
+		float: right;
+		width: 20px;
+		margin-right: 20px;
+		top: -142px;
+	}
+	.bannerTitle {
+		margin: auto;
+		width: 200px;
+		text-align: center;
+		position: relative;
+		bottom: 70px;
+	}
+
+/*TheSevenMain PAGE*/
+
+	.blogDiv, #editThemeDiv {
+		position: relative;
+		margin: auto;
+		top: 60px;
+		width: 75%;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 50px 5px 50px;
+  		padding: 10px;
+  		padding-left: 20px;
+  		margin-bottom: 20px;
+	}
+	.articleDiv {
+		background-color: red;
+	}
+	.row1ContainerDiv {
+		background-color: violet;
+		width: 100%;
+		display: block;
+		overflow: auto;
+	}
+	.blogTitleDiv {
+		background-color: orange;
+		min-width: calc(100% - 25px);
+		float: left;
+		text-align: center;
+	}
+	.blogEditButtonDiv {
+		background-color: yellow;
+		width: 25px;
+		min-height: 20px;
+		float: right;
+		font-weight: bold;
+	}
+	.row2ContainerDiv {
+		clear: both;
+		background-color: peach;
+	}
+	.blogDateDiv {
+		background-color: blue;
+		float: left;
+		width: 50%;
+		text-align: center;
+	}
+	.blogAuthorDiv {
+		background-color: green;
+		float: right;
+		width: 50%;
+		text-align: center;
+	}
+	.blogBodyTextDiv {
+		background-color: purple;
+	}
+	.row4ContainerDiv {
+		background-color: navy;
+	}
+	.blogCommentDiv {
+		background-color: pink;
+		text-align: center;
+		min-width: calc(100% - 25px);
+		float: left;
+	}
+	.blogAddButtonDiv {
+		background-color: white;
+		width: 25px;
+		min-height: 20px;
+		float: right;
+	}
+	.editOptionsDiv {
+		position: absolute;
+		z-index: 10;
+		background-color: blue;
+		width: 100px;
+		display: block;
+		overflow: auto;
+		/* 100% of blog div - width of editOptionsDiv + blogDiv padding */
+		left: calc(100% - 120px);
+  		top: 30px;
+  		padding: 5px;
+  		visibility: visible;
+	}
+	.editButton:hover {
+		background-color: pink;
+		padding: 3px;
+	}
+	.deleteButton:hover {
+		background-color: pink;
+		padding: 3px;
+	}
+
+/* YOUR PROFILE */
+
+	#mainProfileDetailsDiv {
+		position: relative;
+		display:block;
+  		margin: auto;
+  		top: 15%;
+  		right: 0;
+  		left: 0;
+  		bottom: 0;
+  		width: 80%;
+  		min-height: 400px;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 50px 5px 50px;
+	}
+	#leftSideDiv {
+		float: left;
+		padding: 10px;
+		width: 30%;
+		min-width: 250px;
+	}
+	#rightSideDiv {
+		overflow: hidden;
+		padding: 10px;
+	}
+	#profilePhotoDiv {
+		position: relative;
+		margin: auto;
+	}
+	#profileImage {
+		width: auto;
+		height: auto;
+		max-height: 250px;
+		max-width: 250px;
+		display: block;
+   	 	margin-left: auto;
+    	margin-right: auto;
+    	border-radius: 5px;
+	}
+	#themeDiv {
+		margin: auto;
+		margin-top: 20px;
+		position: relative;
+		width: 250px;
+		height: 50px;
+		border-radius: 10px;
+		text-align: center;
+		line-height: 50px;
+		font-size: 120%;
+		color: #7A8D95;
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.9);
+	}
+	#profileDetailsDiv {
+		font-size: 130%;
+	}
+	
+	.blogDiv {
+		position: relative;
+		margin: auto;
+		top: 15%;
+		width: 75%;
+		background-color: rgba(0, 0, 0, 0.5);
+  		border-radius: 5px 50px 5px 50px;
+  		padding: 10px;
+  		padding-left: 20px;
+  		margin-top: 20px;
+  		margin-bottom: 20px;
+	}
+
+	tr td:first-child {
+		font-weight: bold;
+		padding-right: 10px;	
+	}
+	td {
+		padding-bottom: 20px;
+	}
+
+	@media (max-width:750px) { 
+		#rightSideDiv {
+			float: none;
+			position: relative;
+			min-width: 300px;
+		}
+		#leftSideDiv {
+			float: none;
+			position: relative;
+			width: 100%;
+		}
+		#mainProfileDetailsDiv {
+			display:block;
+			
+		}
+	}
+
+/* HOME including Sign In and Sign Up Forms */
+
+	#mainBody {
+		height: 400px;
+		top: 0;
+	}
+	#mainBody, #signUpFormDiv, #signInFormDiv {
+		position: absolute;
+  		margin: auto;
+  		right: 0;
+  		left: 0;
+  		bottom: 20%;
+  		width: 480px;
+  		border-radius: 5px 100px 5px 100px;
+	}
+	#signUpFormDiv, #signInFormDiv {
+		text-align: center;
+		display: none;
+	}
+	#signInFormDiv {
+		height: 400px;
+  		top: 0;
+	}
+	#signUpFormDiv {
+		height: 500px;
+		top: 20px;
+	}
+	#signUpButton, #signInButton, input[type=submit], #continueSignUpButton{
+		margin: auto;
+		position: relative;
+		width: 300px;
+		height: 60px;
+		background-color: blue;
+		border-radius: 10px;
+		text-align: center;
+		line-height: 60px;
+		font-size: 150%;
+		color: #7A8D95;
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.9);
+		border: none;
+	}
+	#signInButton {
+		top: 20px;
+	}
+	.mainHeading {
+		font-size: 300%;
+		text-align: center;
+	}
+	.formHeading {
+		position: relative;
+		padding-top: 50px;
+	}
+	#descriptionText {
+		font-size: 150%;
+		text-align: center;
+	}
+	.exitButton {
+		position: absolute;
+		text-align: left;
+		font-size: 120%;
+		margin-left: 8px;
+		margin-top: -118px;
+		cursor: pointer;
+	}
+	input {
+		font-size: 120%;
+		border: none;
+		border-radius: 3px;
+		outline: none;
+	}
+	input:focus {
+		border: solid black 1px;
+		box-shadow: 0 0 5px black;
+	}
+	#usernameId, #passwordId, #errorsDiv {
+		position: relative;
+		top: -20px;
+	}
+	.valid {
+		border: solid green 1px;
+		box-shadow: 0 0 5px green;
+	}
+	.invalid {
+		border: solid red 1px;
+		box-shadow: 0 0 5px red;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
