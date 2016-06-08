@@ -1,5 +1,7 @@
-package SevenBlog;
+package ourblog;
+
 import java.io.BufferedReader;
+
 
 import java.io.DataOutputStream;
 import java.io.IOException;

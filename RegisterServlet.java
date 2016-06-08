@@ -1,4 +1,6 @@
-package SevenBlog;
+package ourblog;
+
+
 
 
 
@@ -24,25 +26,33 @@ public class RegisterServlet extends HttpServlet {
  
     private static final long serialVersionUID = -6506682026701304964L;
  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		throw new ServletException("Servlet " + getClass().getName() + " does not accept the GET method. Use POST method.");
+	}
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	PrintWriter out = response.getWriter();
+    	 PrintWriter out = response.getWriter();
     	 Connection conn = null;
     	 
-        // get reCAPTCHA request param
-        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
- 
+    	 // get reCAPTCHA request param
+    	 //   String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+    	 //  boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+    	 boolean verify = true;
                 
         if (verify) {
 
         	 try{  
-        		 String uname = request.getParameter("userName");
-        		 String fname = request.getParameter("firstName");  
-                 String lname = request.getParameter("lastName");  
+        		 String username = request.getParameter("username");
+        		 String fname = request.getParameter("firstname");  
+                 String lname = request.getParameter("lastname");  
                  String email = request.getParameter("email");  
-                 String password = request.getParameter("password");  
+                 String clearpass = request.getParameter("password"); 
                  
+                 String hashpass = PasswordHash.hashPassword(clearpass);
+                 
+            //     String pbkpass = PasswordPBK.createHash(clearpass);
 
                  String dbMode = "mysql";
          		 String dbClassName = "com.mysql.jdbc.Driver";
@@ -54,14 +64,15 @@ public class RegisterServlet extends HttpServlet {
          		 Class.forName(dbClassName); 
          		 String DB_CONNSTRING = "jdbc:"+dbMode+"://" + host + "/" + db;
          		 conn = DriverManager.getConnection(DB_CONNSTRING, dbusername, dbpassword);
-         	
-         	     PreparedStatement pst =(PreparedStatement) conn.prepareStatement("Insert into Members(userName, firstName,lastName,email,password) values(?,?,?,?,?)"); 
+         		 
+         		 String sql = "Insert into Members(userName,firstName,lastName,email,password) values(?,?,?,?,?)";
+         	     PreparedStatement pst =(PreparedStatement) conn.prepareStatement(sql); 
 
-                 pst.setString(1,uname);  
+                 pst.setString(1,username);  
                  pst.setString(2,fname);        
                  pst.setString(3,lname);
                  pst.setString(4,email);
-                 pst.setString(5,password);
+                 pst.setString(5,hashpass);
                                 
                  int result = pst.executeUpdate();
                                   
@@ -75,6 +86,8 @@ public class RegisterServlet extends HttpServlet {
                    out.println("<font size='6' color=red>" + msg + "</font>");
                   }  
                  pst.close();
+                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/BlogPage.jsp");
+                 rd.forward(request, response);
                }  
                catch (Exception e){  
                  out.println(e);  
@@ -86,10 +99,11 @@ public class RegisterServlet extends HttpServlet {
        					e.printStackTrace();
        				}
        		    	}
-       	    }
+     	    }
 
         } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Home.jsp");
+            rd.forward(request, response);
             out.println("<font color=red>The Captcha could not be verified. Please try again.</font>");
             rd.include(request, response);
         } 
